@@ -2,14 +2,16 @@ package com.example.codelabadvanceandroidfragmentsowndemo
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
 
     private lateinit var openButton: Button
     private var isFragmentDisplayed: Boolean = false
     val STATE_FRAGMENT = "state_of_fragment"
+    private var mRadioButtonChoice = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,16 +34,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//            savedInstanceState?.let {
-//                isFragmentDisplayed = savedInstanceState.getBoolean(STATE_FRAGMENT)
-//                if (isFragmentDisplayed) displayFragment()
-//                else closeFragment()
-//            }
-
     }
 
     private fun displayFragment() {
-        val simpleFragment = SimpleFragment().newInstance()
+        val simpleFragment = SimpleFragment().newInstance(mRadioButtonChoice)
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
@@ -61,10 +57,6 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.remove(simpleFragment).commit()
         }
 
-//        simpleFragment?.let {
-//            val fragmentTransaction = fragmentManager.beginTransaction()
-//            fragmentTransaction.remove(simpleFragment).commit()
-//        }
         openButton.text = getString(R.string.open)
         isFragmentDisplayed = false
     }
@@ -72,6 +64,11 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
         savedInstanceState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed)
         super.onSaveInstanceState(savedInstanceState)
+    }
+
+    override fun onRadioButtonChoice(choice: Int) {
+        mRadioButtonChoice = choice
+        Toast.makeText(this, "Choice  is: $choice", Toast.LENGTH_SHORT).show()
     }
 
 }

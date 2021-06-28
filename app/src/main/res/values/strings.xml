@@ -29,5 +29,9 @@
     <string name="question_the_song">LIKE THE SONG?</string>
     <string name="my_rating">My Rating:</string>
 
+    <!-- strings for second code lab-->
+    <string name="title_song_detail">Song Detail</string>
+    <string name="article_title">Beatles Anthology Vol. 1</string>
+    <string name="article_subtitle">Behind That Locked Door: Beatles Rarities!</string>
 
 </resources>
